@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,25 +10,64 @@
     <packaging>war</packaging>
 
     <name>JPetStore</name>
-    <description>JPetStore Maven Build</description>
+    <description>JPetStore Build</description>
 
-    <!-- Dependencies -->
+    <!-- =========================================================
+         DEPENDENCIES
+         ========================================================= -->
     <dependencies>
+
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- =======================
+             STRIPES FRAMEWORK
+             ======================= -->
+        <dependency>
+            <groupId>net.sourceforge.stripes</groupId>
+            <artifactId>stripes</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.stripes</groupId>
+            <artifactId>stripes-spring</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+
+        <!-- =======================
+             SPRING FRAMEWORK
+             ======================= -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.3.30</version>
+        </dependency>
+
     </dependencies>
 
+
+    <!-- =========================================================
+         BUILD SECTION
+         ========================================================= -->
     <build>
         <finalName>jpetstore</finalName>
 
         <pluginManagement>
             <plugins>
 
-                <!-- WAR plugin -->
+                <!-- WAR Plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -67,7 +105,10 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Active Plugins -->
+
+        <!-- =========================================================
+             ACTIVE PLUGINS
+             ========================================================= -->
         <plugins>
 
             <!-- SonarQube -->
@@ -77,10 +118,11 @@
                 <version>3.9.1.2184</version>
             </plugin>
 
-            <!-- Cargo Plugin -->
+            <!-- Cargo Plugin (optional Tomcat automation) -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven3-plugin</artifactId>
+                <version>1.10.1</version>
                 <executions>
                     <execution>
                         <id>start-container</id>
@@ -95,7 +137,7 @@
                 </executions>
             </plugin>
 
-            <!-- Failsafe Tests -->
+            <!-- Integration Tests -->
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
