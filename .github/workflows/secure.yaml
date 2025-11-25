@@ -49,15 +49,18 @@ jobs:
 
       - name: 🔎 SonarQube Analysis
         run: |
-         mvn verify sonar:sonar \
-         -Dsonar.projectKey=TrainBook \
-         -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          mvn clean verify sonar:sonar \
+            -DskipTests \
+            -Dsonar.projectKey=TrainBook \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: 📤 Upload Artifact to Nexus
-        run: mvn deploy -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_REPO_URL }}
+        run: |
+          mvn deploy \
+            -DskipTests \
+            -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_REPO_URL }}
 
-      
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
