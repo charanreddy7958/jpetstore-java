@@ -27,16 +27,11 @@
 
         <!-- =======================
              STRIPES FRAMEWORK
+             (ONLY THIS — stripes-spring DOES NOT EXIST)
              ======================= -->
         <dependency>
             <groupId>net.sourceforge.stripes</groupId>
             <artifactId>stripes</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sourceforge.stripes</groupId>
-            <artifactId>stripes-spring</artifactId>
             <version>1.5.8</version>
         </dependency>
 
@@ -81,6 +76,7 @@
                     </configuration>
                 </plugin>
 
+                <!-- Failsafe defaults -->
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.1.2</version>
@@ -105,7 +101,6 @@
             </plugins>
         </pluginManagement>
 
-
         <!-- =========================================================
              ACTIVE PLUGINS
              ========================================================= -->
@@ -118,7 +113,7 @@
                 <version>3.9.1.2184</version>
             </plugin>
 
-            <!-- Cargo Plugin (optional Tomcat automation) -->
+            <!-- Cargo Plugin -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven3-plugin</artifactId>
@@ -127,12 +122,16 @@
                     <execution>
                         <id>start-container</id>
                         <phase>pre-integration-test</phase>
-                        <goals><goal>start</goal></goals>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
                     </execution>
                     <execution>
                         <id>stop-container</id>
                         <phase>post-integration-test</phase>
-                        <goals><goal>stop</goal></goals>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
